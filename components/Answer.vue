@@ -7,21 +7,25 @@
         class="flex items-center"
       >
         <RadioButton
-          v-model="selectedAnswer"
+          v-model="answerID"
           :input-id="answer.id"
           :name="questionId"
           :value="answer.value"
           @change="onAnswerChange"
-          :inputProps="required"
         />
         <label :for="answer.id" class="ml-2 text-lg">{{ answer.label }}</label>
       </div>
     </div>
+
+    <small id="text-error" class="p-error">{{
+      errorMessage || '&nbsp;'
+    }}</small>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { useField } from 'vee-validate'
 
 export default {
   props: {
@@ -42,12 +46,30 @@ export default {
   },
   setup(props) {
     const answerID = props.answerList.find((answer) => answer.isAnswer)
-    const selectedAnswer = ref(answerID.id)
+    // const selectedAnswer = ref(answerID.id)
     const onAnswerChange = (e) => {
       console.log('🚀 ~ onAnswerChange', e)
     }
 
-    return { selectedAnswer, onAnswerChange }
+    function validateField(value) {
+      console.log('🚀 ~ validateField ~ value:', value)
+      if (!value) {
+        return 'Value  is required.'
+      }
+
+      return true
+    }
+
+    const { checked, errorMessage, errors } = useField(
+      () => answerID,
+      undefined,
+      {
+        type: 'checkbox',
+        checkedValue: true,
+      }
+    )
+
+    return { checked, answerID, onAnswerChange, errorMessage }
   },
 }
 </script>

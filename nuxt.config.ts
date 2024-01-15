@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // https://nuxt.com/modules/auto-animate
 // https://vee-validate.logaretm.com/v4/tutorials/basics/
+// https://codesandbox.io/p/sandbox/y3504yr0l1?file=%2Fsrc%2Fcomponents%2Fpages%2FRadio.vue%3A2%2C32
+// https://www.npmjs.com/package/yup
+// https://formkit.com/
 
 // To Add:
 // https://nuxt.com/modules/vue-transitions
