@@ -13,7 +13,7 @@ export default {
 
 <template>
   <div class="container mx-auto px-4">
-    <h1 class="text-4xl"><strong>Heading One</strong></h1>
+    <h1 class="mb-8 text-4xl"><strong>Heading One</strong></h1>
     <!-- <span class="pi pi-search"></span> -->
 
     <Quiz :quiz-data="quizData.quiz" />

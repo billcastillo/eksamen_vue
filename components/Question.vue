@@ -1,5 +1,5 @@
 <template lang="">
-  <div :id="questionData.id">
+  <div :id="questionData.id" :class="errorMessage ? 'has-error' : ''">
     <h3 class="mb-4 text-xl font-quicksand-bold">
       {{ questionData.questionName }}
     </h3>
@@ -8,7 +8,10 @@
     <Answer
       :answer-list="questionData.answers"
       :question-id="questionData.id"
+      :error-message="questionData.errorMessage"
     />
+
+    <small id="text-error" class="p-error">{{ hasError.errorMessage }}</small>
   </div>
 </template>
 
@@ -20,6 +23,16 @@ export default {
       required: true,
       default() {
         return {}
+      },
+    },
+    hasError: {
+      type: Object,
+      required: false,
+      default() {
+        return {
+          errorMessage: '',
+          errorType: '',
+        }
       },
     },
   },

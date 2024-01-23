@@ -7,25 +7,20 @@
         class="flex items-center"
       >
         <RadioButton
-          v-model="answerID"
+          v-model="selectedAnswer"
           :input-id="answer.id"
           :name="questionId"
           :value="answer.value"
-          @change="onAnswerChange"
         />
         <label :for="answer.id" class="ml-2 text-lg">{{ answer.label }}</label>
       </div>
     </div>
-
-    <small id="text-error" class="p-error">{{
-      errorMessage || '&nbsp;'
-    }}</small>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import { useField } from 'vee-validate'
+import { useAnswerStore } from '@/stores/answerStore'
 
 export default {
   props: {
@@ -45,11 +40,23 @@ export default {
     },
   },
   setup(props) {
-    const answerID = props.answerList.find((answer) => answer.isAnswer)
-    // const selectedAnswer = ref(answerID.id)
-    const onAnswerChange = (e) => {
-      console.log('🚀 ~ onAnswerChange', e)
-    }
+    const answerData = useAnswerStore()
+    const answerObj = props.answerList.find((answer) => answer.isAnswer)
+    console.log('🚀 ~ setup ~ answerID:', answerObj)
+    const selectedAnswer = ref(answerObj.id)
+    console.log('🚀 ~ setup ~ selectedAnswer:', selectedAnswer)
+
+    watch(selectedAnswer, (newVal) => {
+      // console.log("🚀 ~ watch ~ new:", new)
+      console.log('🚀 ~ watch ~ old:', newVal)
+      answerData.setAnswer(props.questionId, selectedAnswer.value)
+    })
+
+    // const onAnswerChange = (e) => {
+    //   console.log('🚀 ~ onAnswerChange ~ e:', e)
+    //   console.log('selectedAnswer:', selectedAnswer)
+    //   useAnswerStore.setAnswer()
+    // }
 
     function validateField(value) {
       console.log('🚀 ~ validateField ~ value:', value)
@@ -60,16 +67,7 @@ export default {
       return true
     }
 
-    const { checked, errorMessage, errors } = useField(
-      () => answerID,
-      undefined,
-      {
-        type: 'checkbox',
-        checkedValue: true,
-      }
-    )
-
-    return { checked, answerID, onAnswerChange, errorMessage }
+    return { answerObj, selectedAnswer }
   },
 }
 </script>

@@ -28,7 +28,7 @@ module.exports = {
   plugins: ['vue'],
   ignorePatterns: ['presets'],
   rules: {
-    'no-console': 'warn',
+    'no-console': 'off',
     indent: 'off',
     'vue/html-indent': 'off',
     'vue/html-self-closing': 'off',

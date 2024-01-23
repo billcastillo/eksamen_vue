@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
+    '@vee-validate/nuxt',
 
     // https://supabase.nuxtjs.org/get-started
     '@nuxtjs/supabase',

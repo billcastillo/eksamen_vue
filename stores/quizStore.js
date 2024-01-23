@@ -9,6 +9,9 @@ export const useQuizStore = defineStore('quizStore', {
     },
   },
   actions: {
+    setQuiz(quiz = {}) {
+      this.quiz = quiz
+    },
     questionAnswer(questionId, answerId) {
       const questionData = this.quiz.find(
         (question) => question.id === questionId

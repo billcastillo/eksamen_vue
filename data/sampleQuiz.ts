@@ -10,6 +10,11 @@ export const sampleQuiz = {
       questionName: 'What is the capital of Taiwan?',
       id: '123134',
       answerType: 'radio',
+      validation: {
+        type: 'radio',
+        errorMessage: '',
+        regex: '',
+      },
       answers: [
         {
           id: 'radio1',
